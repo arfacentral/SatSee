@@ -1,0 +1,16 @@
+{
+  "name": "SatSee - Satellite-Derived Bathymetry Explorer",
+  "short_name": "SatSee",
+  "description": "Tactical shallow-water bathymetry observation and survey platform using multi-source satellite remote sensing.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#070b12",
+  "theme_color": "#00e5ff",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}

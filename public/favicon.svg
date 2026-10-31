@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none">
+  <circle cx="50" cy="50" r="46" stroke="#00e5ff" stroke-width="4" stroke-opacity="0.8" fill="#070b12"/>
+  <circle cx="50" cy="50" r="32" stroke="#00ffaa" stroke-width="2" stroke-dasharray="4 4" stroke-opacity="0.6"/>
+  <circle cx="50" cy="50" r="16" stroke="#00e5ff" stroke-width="2" stroke-opacity="0.4"/>
+  <!-- Subsurface wave / bathymetry contours -->
+  <path d="M20 52 Q35 44, 50 52 T80 52" stroke="#00e5ff" stroke-width="3" stroke-linecap="round"/>
+  <path d="M25 64 Q40 56, 50 64 T75 64" stroke="#00ffaa" stroke-width="3" stroke-linecap="round"/>
+  <path d="M32 76 Q42 70, 50 76 T68 76" stroke="#ffb300" stroke-width="2.5" stroke-linecap="round"/>
+  <!-- Satellite beam reticle -->
+  <circle cx="50" cy="50" r="3" fill="#00e5ff"/>
+  <line x1="50" y1="12" x2="50" y2="28" stroke="#00e5ff" stroke-width="2"/>
+  <line x1="50" y1="72" x2="50" y2="88" stroke="#00e5ff" stroke-width="2"/>
+  <line x1="12" y1="50" x2="28" y2="50" stroke="#00e5ff" stroke-width="2"/>
+  <line x1="72" y1="50" x2="88" y2="50" stroke="#00e5ff" stroke-width="2"/>
+</svg>
