@@ -146,14 +146,24 @@ npm run build
 
 ## Scientific References
 
-- **Lu, T., Wang, L., Ji, C., et al. (2026)**. *Comparative study of different methods for bathymetric mapping based on multi-source remote sensing data*. Scientific Reports, 16:32108.
+- **Lu, T., Wang, L., Ji, C., et al. (2026)**. *Comparative study of different methods for bathymetric mapping based on multi-source remote sensing data*. Scientific Reports, 16:32108. (CC BY 4.0)
 - **Stumpf, R. P., Holderied, K., & Sinclair, M. (2003)**. *Determination of water depth with high-resolution satellite imagery over variable bottom types*. Limnology and Oceanography, 48(1), 547-556.
 - **Lyzenga, D. R. (1978)**. *Passive remote sensing techniques for mapping water depth and bottom features*. Applied Optics, 17(3), 379-383.
 - **Markus, T., et al. (2017)**. *The Ice, Cloud, and land Elevation Satellite-2 (ICESat-2): Science requirements, concept, and implementation*. Remote Sensing of Environment, 190, 260-273.
 
 ---
 
-## Author & Acknowledgements
+## Open Data Attributions & Disclaimer
+
+- **Satellite Imagery**: Contains modified Copernicus Sentinel-2 data (European Space Agency / Copernicus Open Access Hub), accessed via Element 84 / AWS Earth Search STAC.
+- **Spaceborne LiDAR**: NASA ICESat-2 (ATLAS / ATL24) public domain datasets.
+- **Bathymetric Basemaps**: GEBCO Compilation Group (CC BY 4.0), EMODnet Bathymetry Consortium, and NOAA Office of Coast Survey (Public Domain).
+- **Marine Layers**: Submarine cable routes courtesy of TeleGeography Submarine Cable Map (CC BY-NC-SA 4.0, non-commercial use); Baltic AIS data via Fintraffic Digitraffic (CC BY 4.0); seismic feeds via USGS (Public Domain).
+- **Navigational Disclaimer**: SatSee is strictly an educational, scientific, and preliminary reconnaissance visualization platform. Satellite-Derived Bathymetry (SDB) is subject to optical water clarity, atmospheric, and seabed reflectance uncertainties and **must never be used for primary marine navigation**. Always rely on official Hydrographic Office Electronic Navigational Charts (ENCs) and active onboard echosounders.
+
+---
+
+## Author & License
 
 Created by **[Arfa Ali Khan](https://arfaali.cc)** ([@arfacentral](https://github.com/arfacentral)).  
-Designed for coastal hydrographers, marine surveyors, and ocean science enthusiasts.
+Released under the [MIT License](./LICENSE).

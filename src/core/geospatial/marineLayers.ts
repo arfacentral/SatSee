@@ -48,21 +48,21 @@ export interface VesselResult {
 }
 
 const SIMULATED_FLEET = [
-  { name: 'CMA CGM MARCO POLO', type: 'Container Ship', draft: 15.5 },
-  { name: 'MAERSK MC-KINNEY', type: 'Container Ship', draft: 16.0 },
-  { name: 'EVER GIVEN', type: 'Container Ship', draft: 15.7 },
-  { name: 'PACIFIC VOYAGER', type: 'Crude Oil Tanker', draft: 18.2 },
-  { name: 'NORDIC TRADER', type: 'Bulk Carrier', draft: 13.4 },
-  { name: 'ATLANTIC PIONEER', type: 'Offshore Supply', draft: 6.8 },
-  { name: 'OCEAN CHALLENGER', type: 'Research / Survey', draft: 5.2 },
-  { name: 'ISLAND DISCOVERY', type: 'Fishing Vessel', draft: 4.1 },
-  { name: 'CAPE SPEAR', type: 'Stern Trawler', draft: 5.0 },
-  { name: 'BLUE HORIZON', type: 'General Cargo', draft: 8.5 },
-  { name: 'STENA IMPERATOR', type: 'Chemical Tanker', draft: 11.2 },
-  { name: 'ASIAN ENDEAVOUR', type: 'Vehicles Carrier', draft: 9.8 },
-  { name: 'SOUTHERN NAVIGATOR', type: 'LNG Tanker', draft: 12.0 },
-  { name: 'SEA DEFENDER', type: 'Coast Guard Patrol', draft: 4.5 },
-  { name: 'NORTHERN LIGHT', type: 'Passenger Ferry', draft: 5.8 },
+  { name: 'MV ATLANTIC VOYAGER', type: 'Container Ship', draft: 15.5 },
+  { name: 'MV NORTHERN EXPRESS', type: 'Container Ship', draft: 16.0 },
+  { name: 'MV HORIZON TRADER', type: 'Container Ship', draft: 15.7 },
+  { name: 'MT PACIFIC ENDEAVOUR', type: 'Crude Oil Tanker', draft: 18.2 },
+  { name: 'MV NORDIC BULKER', type: 'Bulk Carrier', draft: 13.4 },
+  { name: 'OSV ATLANTIC PIONEER', type: 'Offshore Supply', draft: 6.8 },
+  { name: 'RV OCEAN CHALLENGER', type: 'Research / Survey', draft: 5.2 },
+  { name: 'FV ISLAND DISCOVERY', type: 'Fishing Vessel', draft: 4.1 },
+  { name: 'FV CAPE SPEAR', type: 'Stern Trawler', draft: 5.0 },
+  { name: 'MV BLUE HORIZON', type: 'General Cargo', draft: 8.5 },
+  { name: 'MT BALTIC MARINER', type: 'Chemical Tanker', draft: 11.2 },
+  { name: 'MV EASTERN CARRIER', type: 'Vehicles Carrier', draft: 9.8 },
+  { name: 'MT SOUTHERN NAVIGATOR', type: 'LNG Tanker', draft: 12.0 },
+  { name: 'PV SEA DEFENDER', type: 'Coastal Patrol', draft: 4.5 },
+  { name: 'MV NORTHERN LIGHT', type: 'Passenger Ferry', draft: 5.8 },
 ];
 
 /** Generates realistic shipping-lane traffic for any oceanic viewport. */

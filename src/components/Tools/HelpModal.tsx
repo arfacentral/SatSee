@@ -81,8 +81,9 @@ export const HelpModal: React.FC<Props> = ({ isOpen, onClose }) => {
             <p><b>Submarine cables</b>: global telecom cable routes (TeleGeography, non-commercial licence). <b>Live vessels</b>: real and simulated AIS positions (green arrows are underway, grey are anchored/moored). <b>Earthquakes</b>: USGS, past 7 days; red rings carry a tsunami flag.</p>
           </Section>
 
-          <Section title="Limits">
+          <Section title="Limits & Navigational Disclaimer">
             <p>Turbid water, clouds, waves, glint and dark seabed (seagrass) reduce accuracy. Always calibrate against local ground truth where you can.</p>
+            <p><b>Not for Navigation</b>: SatSee is an open-source scientific, educational, and reconnaissance tool. Satellite-derived depths do not replace official hydrographic charts (ENC/RNC) or active echosounder surveys and must never be used for primary marine navigation.</p>
           </Section>
         </div>
 
