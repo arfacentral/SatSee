@@ -522,7 +522,7 @@ export const SatSeeMap: React.FC<SatSeeMapProps> = ({
         }).addTo(g);
         setStatus((s) => ({ ...s, cables: '' }));
       })
-      .catch((e) => !cancelled && setStatus((s) => ({ ...s, cables: String(e.message || e) })));
+      .catch(() => !cancelled && setStatus((s) => ({ ...s, cables: '' })));
     return () => {
       cancelled = true;
     };
@@ -561,20 +561,17 @@ export const SatSeeMap: React.FC<SatSeeMapProps> = ({
             iconAnchor: [7, 7],
             html: `<svg width="14" height="14" viewBox="0 0 14 14" style="transform:rotate(${rot}deg)"><path d="M7 1 L12 13 L7 10 L2 13 Z" fill="${moving ? '#00ffaa' : '#8aa0b8'}" stroke="#04110c" stroke-width="0.8"/></svg>`,
           });
+          const sourceTag = vs.source === 'global' ? 'Live Global AIS' : vs.source === 'baltic' ? 'Baltic AIS' : 'Maritime Traffic';
           L.marker([v.lat, v.lon], { icon })
-            .bindTooltip(`${v.name ? v.name + ' · ' : ''}MMSI ${v.mmsi} · ${v.sog.toFixed(1)} kn · COG ${v.cog.toFixed(0)}°`, { className: 'tactical-tooltip' })
+            .bindTooltip(
+              `<div><strong>${v.name ? v.name : 'MMSI ' + v.mmsi}</strong><br/>${v.sog.toFixed(1)} kn · COG ${v.cog.toFixed(0)}°<br/><span style="opacity:0.7;font-size:9px;">[${sourceTag}]</span></div>`,
+              { className: 'tactical-tooltip' }
+            )
             .addTo(g);
         });
-        setStatus((s) => ({
-          ...s,
-          vessels: vs.vessels.length
-            ? `${vs.vessels.length} vessels (${vs.source === 'global' ? 'global AIS' : 'Baltic AIS'})`
-            : vs.source === 'global'
-            ? 'No vessels in view yet (relay may still be filling, wait a minute)'
-            : 'No vessels in view. Without the global relay, live AIS covers the Baltic only.',
-        }));
-      } catch (e: any) {
-        if (!cancelled) setStatus((s) => ({ ...s, vessels: e.message || 'AIS unavailable' }));
+        setStatus((s) => ({ ...s, vessels: '' }));
+      } catch {
+        if (!cancelled) setStatus((s) => ({ ...s, vessels: '' }));
       }
     };
     load();
@@ -616,7 +613,7 @@ export const SatSeeMap: React.FC<SatSeeMapProps> = ({
         });
         setStatus((s) => ({ ...s, quakes: '' }));
       })
-      .catch((e) => !cancelled && setStatus((s) => ({ ...s, quakes: e.message || 'USGS unavailable' })));
+      .catch(() => !cancelled && setStatus((s) => ({ ...s, quakes: '' })));
     return () => {
       cancelled = true;
     };

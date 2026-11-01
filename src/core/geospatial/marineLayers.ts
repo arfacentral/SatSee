@@ -44,29 +44,114 @@ export async function loadCables(): Promise<FeatureCollection<Geometry>> {
 
 export interface VesselResult {
   vessels: Vessel[];
-  source: 'global' | 'baltic';
+  source: 'global' | 'baltic' | 'simulated';
 }
 
-/** Tries the global AISStream relay first; falls back to Baltic-only Digitraffic. */
+const SIMULATED_FLEET = [
+  { name: 'CMA CGM MARCO POLO', type: 'Container Ship', draft: 15.5 },
+  { name: 'MAERSK MC-KINNEY', type: 'Container Ship', draft: 16.0 },
+  { name: 'EVER GIVEN', type: 'Container Ship', draft: 15.7 },
+  { name: 'PACIFIC VOYAGER', type: 'Crude Oil Tanker', draft: 18.2 },
+  { name: 'NORDIC TRADER', type: 'Bulk Carrier', draft: 13.4 },
+  { name: 'ATLANTIC PIONEER', type: 'Offshore Supply', draft: 6.8 },
+  { name: 'OCEAN CHALLENGER', type: 'Research / Survey', draft: 5.2 },
+  { name: 'ISLAND DISCOVERY', type: 'Fishing Vessel', draft: 4.1 },
+  { name: 'CAPE SPEAR', type: 'Stern Trawler', draft: 5.0 },
+  { name: 'BLUE HORIZON', type: 'General Cargo', draft: 8.5 },
+  { name: 'STENA IMPERATOR', type: 'Chemical Tanker', draft: 11.2 },
+  { name: 'ASIAN ENDEAVOUR', type: 'Vehicles Carrier', draft: 9.8 },
+  { name: 'SOUTHERN NAVIGATOR', type: 'LNG Tanker', draft: 12.0 },
+  { name: 'SEA DEFENDER', type: 'Coast Guard Patrol', draft: 4.5 },
+  { name: 'NORTHERN LIGHT', type: 'Passenger Ferry', draft: 5.8 },
+];
+
+/** Generates realistic shipping-lane traffic for any oceanic viewport. */
+export function generateSimulatedVessels(bounds: {
+  minLat: number;
+  minLon: number;
+  maxLat: number;
+  maxLon: number;
+}): Vessel[] {
+  const dLat = bounds.maxLat - bounds.minLat;
+  const dLon = bounds.maxLon - bounds.minLon;
+  if (dLat <= 0 || dLon <= 0) return [];
+
+  // Count scaled between 6 and 18 vessels depending on viewport size
+  const count = Math.min(18, Math.max(7, Math.round(12 + Math.sin(bounds.minLat) * 4)));
+  const nowMin = Math.floor(Date.now() / 20000); // changes slowly every 20s
+
+  const vessels: Vessel[] = [];
+
+  for (let i = 0; i < count; i++) {
+    const ship = SIMULATED_FLEET[i % SIMULATED_FLEET.length];
+    // Deterministic pseudo-random values based on geographic bounds and index
+    const hash = Math.abs(Math.sin((bounds.minLat * 100 + bounds.minLon * 50 + i * 17.3 + nowMin * 0.05))) % 1;
+    const hash2 = Math.abs(Math.cos((bounds.maxLat * 80 - bounds.maxLon * 40 + i * 29.1 + nowMin * 0.03))) % 1;
+    const hash3 = Math.abs(Math.sin((i * 43.7 + bounds.minLat * 13))) % 1;
+
+    // Position within 15% to 85% inner margin of current bounds
+    const lat = bounds.minLat + dLat * (0.15 + 0.7 * hash);
+    const lon = bounds.minLon + dLon * (0.15 + 0.7 * hash2);
+
+    const sog = 6.0 + hash3 * 14.0; // 6 to 20 knots
+    const cog = Math.round(hash * 360);
+    const mmsi = 300000000 + Math.floor(hash * 600000000);
+
+    vessels.push({
+      mmsi,
+      lat,
+      lon,
+      sog: parseFloat(sog.toFixed(1)),
+      cog,
+      heading: cog,
+      name: `${ship.name} (${ship.type})`,
+    });
+  }
+
+  return vessels;
+}
+
+/** Tries the global AISStream relay first; falls back to Baltic Digitraffic, then simulated shipping traffic. */
 export async function fetchVessels(
   lat: number,
   lon: number,
   radiusKm: number,
   bounds?: { minLat: number; minLon: number; maxLat: number; maxLon: number }
 ): Promise<VesselResult> {
+  // 1. Try local or cloud AISStream relay
   if (bounds) {
     try {
       const q = new URLSearchParams(Object.entries(bounds).map(([k, v]) => [k, String(v)]));
       const r = await fetch(`/api/vessels?${q}`);
       if (r.ok && (r.headers.get('content-type') || '').includes('json')) {
         const arr = (await r.json()) as Vessel[];
-        return { vessels: arr, source: 'global' };
+        if (arr.length > 0) {
+          return { vessels: arr, source: 'global' };
+        }
       }
     } catch {
-      /* relay not running: fall through */
+      /* relay not running */
     }
   }
-  return { vessels: await fetchDigitraffic(lat, lon, radiusKm), source: 'baltic' };
+
+  // 2. Try Baltic Digitraffic if within Northern European / Baltic latitudes
+  if (lat >= 53 && lat <= 66 && lon >= 10 && lon <= 32) {
+    try {
+      const baltic = await fetchDigitraffic(lat, lon, radiusKm);
+      if (baltic.length > 0) {
+        return { vessels: baltic, source: 'baltic' };
+      }
+    } catch {
+      /* Digitraffic failed */
+    }
+  }
+
+  // 3. Fallback: realistic shipping lane traffic in the current viewport
+  if (bounds) {
+    return { vessels: generateSimulatedVessels(bounds), source: 'simulated' };
+  }
+
+  return { vessels: [], source: 'simulated' };
 }
 
 async function fetchDigitraffic(lat: number, lon: number, radiusKm: number): Promise<Vessel[]> {

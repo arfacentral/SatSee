@@ -78,7 +78,7 @@ export const HelpModal: React.FC<Props> = ({ isOpen, onClose }) => {
 
           <Section title="Marine intelligence layers (Layers menu)">
             <p><b>Eye button</b> (under the zoom buttons): hides or shows all SDB analytical overlays (depth surface, ICESat-2 tracks, contours) so you can see the plain map.</p>
-            <p><b>Submarine cables</b>: global telecom cable routes (TeleGeography, non-commercial licence). <b>Live vessels</b>: real AIS positions (global if the relay is running, otherwise Baltic Sea only); green arrows are moving, grey are stationary. <b>Earthquakes</b>: USGS, past 7 days; red rings carry a tsunami flag.</p>
+            <p><b>Submarine cables</b>: global telecom cable routes (TeleGeography, non-commercial licence). <b>Live vessels</b>: real and simulated AIS positions (green arrows are underway, grey are anchored/moored). <b>Earthquakes</b>: USGS, past 7 days; red rings carry a tsunami flag.</p>
           </Section>
 
           <Section title="Limits">

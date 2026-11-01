@@ -132,7 +132,7 @@ export const LayersModal: React.FC<LayersModalProps> = ({
             <div className="space-y-2">
               {[
                 { label: 'Submarine Telecom Cables', note: 'Global cable routes. TeleGeography, CC BY-NC-SA (non-commercial).', v: showCables, set: onToggleCables, c: 'accent-pink-400', t: 'text-pink-300' },
-                { label: 'Live Vessel Tracks (AIS)', note: 'Real-time AIS. Global when the AISStream relay is running (npm run relay), otherwise Baltic Sea only.', v: showVessels, set: onToggleVessels, c: 'accent-emerald-400', t: 'text-emerald-300' },
+                { label: 'Live Vessel Tracks (AIS)', note: 'Live & simulated maritime AIS shipping traffic. Full global real-time stream when local relay is active.', v: showVessels, set: onToggleVessels, c: 'accent-emerald-400', t: 'text-emerald-300' },
                 { label: 'Earthquakes (past 7 days, M2.5+)', note: 'USGS global feed. Red rings carry a tsunami flag.', v: showQuakes, set: onToggleQuakes, c: 'accent-amber-400', t: 'text-amber-300' },
               ].map((o) => (
                 <label key={o.label} className="flex items-center justify-between p-3 rounded-lg bg-slate-900/80 border border-slate-800 hover:border-slate-700 cursor-pointer">
