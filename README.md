@@ -1,11 +1,16 @@
 # SatSee: Global Satellite-Derived Bathymetry (SDB) Platform
 
+[![Live App](https://img.shields.io/badge/Live_App-Launch_SatSee-00e5ff?style=for-the-badge&logo=googlemaps&logoColor=black)](https://arfacentral.github.io/SatSee/)
+
 [![License: MIT](https://img.shields.io/badge/License-MIT-cyan.svg)](https://opensource.org/licenses/MIT)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.7-blue.svg)](https://www.typescriptlang.org/)
 [![Vite](https://img.shields.io/badge/Vite-6.1-646CFF.svg)](https://vitejs.dev/)
 [![React](https://img.shields.io/badge/React-18-61DAFB.svg)](https://react.dev/)
 [![Sentinel-2](https://img.shields.io/badge/Sentinel--2-L2A_BOA-00e5ff.svg)](https://dataspace.copernicus.eu/)
 [![ICESat-2](https://img.shields.io/badge/ICESat--2-ATL24_LiDAR-00ffaa.svg)](https://icesat-2.gsfc.nasa.gov/)
+
+> 🌊 **Live Web Platform:** **[https://arfacentral.github.io/SatSee/](https://arfacentral.github.io/SatSee/)**  
+> *(Custom domain alias: `https://satsee.arfaali.cc`)*
 
 **SatSee** is an open-access, browser-native spatial intelligence and Satellite-Derived Bathymetry (SDB) platform. It allows coastal researchers, hydrographic survey crews, marine navigators, and the public to inspect shallow underwater bathymetry (0–30 meters) anywhere on Earth.
 
