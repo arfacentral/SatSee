@@ -40,15 +40,22 @@ export async function searchSentinel2Scene(
   };
 
   try {
-    let response: Response;
+    let response: Response | null = null;
     try {
       response = await fetch('/api/sentinel/search', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(queryPayload),
       });
+      if (!response.ok) {
+        response = null; // Trigger direct fallback on static hosting (404)
+      }
     } catch {
-      // Direct query fallback
+      response = null;
+    }
+
+    if (!response) {
+      // Direct STAC API query fallback
       response = await fetch('https://earth-search.aws.element84.com/v1/search', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },

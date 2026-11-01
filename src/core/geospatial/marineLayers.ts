@@ -34,7 +34,9 @@ let cableCache: FeatureCollection<Geometry> | null = null;
 
 export async function loadCables(): Promise<FeatureCollection<Geometry>> {
   if (cableCache) return cableCache;
-  const r = await fetch('/data-cables.json');
+  const baseUrl = import.meta.env.BASE_URL || '/';
+  const cablePath = `${baseUrl.endsWith('/') ? baseUrl : baseUrl + '/'}data-cables.json`;
+  const r = await fetch(cablePath);
   if (!r.ok) throw new Error(`Cable data unavailable (${r.status})`);
   cableCache = (await r.json()) as FeatureCollection<Geometry>;
   return cableCache;
